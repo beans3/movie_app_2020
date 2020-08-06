@@ -1,5 +1,11 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import Home from './routes/Home';
+import './App.css';
+import { HashRouter, Route } from 'react-router-dom';
+import About from './routes/About';
+import Navigation from './components/Navigation';
+import Detail from './routes/Detail';
 // import PropTypes from 'prop-types';
 
 // function Food( { name, picture, rating } ){
@@ -62,7 +68,7 @@ import axios from 'axios';
 //   rating: PropTypes.number
 // };
 
-class App extends React.Component {
+// class App extends React.Component {
   
   // constructor(props) {
   //   super(props);
@@ -105,41 +111,73 @@ class App extends React.Component {
   //   console.log('Goodbye, cruel world');
   // }
 
-  state = {
-      isLoading: true,
-      movies: [],
-  };
+  // state = {
+  //     isLoading: true,
+  //     movies: [],
+  // };
 
-  getMovies = async () => {
-    const {
-      data: {
-        data: {movies},
-      },
-    } = await axios.get('https://yts-proxy.now.sh/list_movies.json?sort_by=rating');
-    // console.log(movies);
-    this.setState({ movies: movies, isLoading: false });
-  };
+  // getMovies = async () => {
+  //   const {
+  //     data: {
+  //       data: {movies},
+  //     },
+  //   } = await axios.get('https://yts-proxy.now.sh/list_movies.json?sort_by=rating');
+//     // console.log(movies);
+//     this.setState({ movies: movies, isLoading: false });
+//   };
 
-  componentDidMount() {
-    // 영화 데이터 로딩
-    // setTimeout(() => {
-    //   this.setState({ isLoading: false });
-    // }, 6000);
-    this.getMovies();
-  }
+//   componentDidMount() {
+//     // 영화 데이터 로딩
+//     // setTimeout(() => {
+//     //   this.setState({ isLoading: false });
+//     // }, 6000);
+//     this.getMovies();
+//   }
 
-  render(){
-    // console.log("I'm rendering");
-    // return (
-    //   <div>
-    //     <h1>The number is: {this.state.count}</h1>
-    //     <button onClick={this.add}>Add</button>
-    //     <button onClick={this.minus}>Minus</button>
-    //   </div>
-    // );
-    const { isLoading } = this.state;
-    return <div>{isLoading ? 'Loading...' : 'We are ready'}</div>;
-  }
+//   render(){
+//     // console.log("I'm rendering");
+//     // return (
+//     //   <div>
+//     //     <h1>The number is: {this.state.count}</h1>
+//     //     <button onClick={this.add}>Add</button>
+//     //     <button onClick={this.minus}>Minus</button>
+//     //   </div>
+//     // );
+//     const { isLoading, movies } = this.state;
+//     return (
+//       <section className="container">
+//         {isLoading ? (
+//           <div className="loader">
+//             <span className="loader__text">Loading...</span>
+//           </div>
+//         ) : (
+//           <div className="movies">
+//             {movies.map((movie) => (
+//                 <Movie
+//                   key={movie.id}
+//                   id={movie.id}
+//                   year={movie.year}
+//                   title={movie.title}
+//                   summary={movie.summary}
+//                   poster={movie.medium_cover_image}
+//                   genres={movie.genres}
+//                 />
+//               ))}
+//             </div>
+//         )}
+//       </section>
+//     );
+//   }
+// }
+function App() {
+    // return <Home />;
+    return (
+        <HashRouter>
+          <Navigation />
+          <Route path="/" exact={true} component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/movie-detail" component={Detail} />
+        </HashRouter>
+    );
 }
-
 export default App;
